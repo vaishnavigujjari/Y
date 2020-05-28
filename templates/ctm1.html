@@ -93,7 +93,8 @@
         
         <label class="c">{{i.player_name}} 
           {{i.points}}
-            <input type="checkbox"  name="batsmen" id="{{i.player_id}}" value="{{i.player_id}}" onclick="load_points({{i.player_id}})">
+            <input type="checkbox"  name="batsmen" id="{{i.player_id}}" 
+            value="{{i.player_id}}" onclick="'load_points({{i.player_id}})'">
             <span class="checkmark"></span>
           </label>
 
@@ -123,7 +124,8 @@
          {% for i in bowler %}
          <label class="c">{{i.player_name}} 
           {{i.points}}
-            <input type="checkbox"  name="bowler" id="{{i.player_id}}" value="{{i.player_id}}" onclick="load_points({{i.player_id}})">
+            <input type="checkbox"  name="bowler" id="{{i.player_id}}" 
+            value="{{i.player_id}}" onclick="'load_points({{i.player_id}})'">
             <span class="checkmark"></span>
           </label>
         <br>
@@ -156,7 +158,7 @@
          <label class="c">{{i.player_name}} 
           {{i.points}}
             <input type="checkbox"  name="all_rounder" id="{{i.player_id}}" 
-            value="{{i.player_id}}" onclick="load_points({{ i.player_id }});">
+            value="{{i.player_id}}" onclick="'load_points({{ i.player_id }});'">
             <span class="checkmark"></span>
           </label>
         <br>
@@ -188,7 +190,8 @@
           {% for i in wicket_keeper %}
          <label class="c">{{i.player_name}} 
           {{i.points}}
-            <input type="checkbox"  name="wicket_keeper" id="{{i.player_id}}" value="{{i.player_id}}" onclick="load_points({{i.player_id}})">
+            <input type="checkbox"  name="wicket_keeper" id="{{i.player_id}}" 
+            value="{{i.player_id}}" onclick="'load_points({{i.player_id}})'">
             <span class="checkmark"></span>
           </label>
       {% endfor %}
@@ -310,7 +313,7 @@
   <script src="{% static 'js/main.js' %}"></script>
   <script >
       $(document).ready( function() {
-        document.getElementById('remaining_points').innerHTML = {{points}};
+        document.getElementById('remaining_points').innerHTML = '{{points}}';
       })
       function load_points(id){
         console.log("In function");
