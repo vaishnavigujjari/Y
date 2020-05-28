@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.login{
+			text-align: center;
+			border:2px solid green;
+			font-size: 20px; 
+			
+			width: 25%;
+    		padding: 15px 35px;
+   			margin: 10px 5px;
+    		box-sizing: border-box;
+    		margin-left: 1%;
+    		margin-top: -7%;
+    		height: 400px;
+
+
+		}
+		.register{
+			text-align: center;
+			border:2px solid green;
+			font-size: 20px; 
+			
+			width: 25%;
+    		padding: 15px 22px;
+   			margin: 10px 5px;
+    		box-sizing: border-box;
+    		display: inline-block;
+    		margin-left: 74%;
+    		margin-top: -15%;
+    		height: 480px;
+		}
+		body{
+			background-image: url('https://www.rsabet.co.za/wp-content/uploads/2019/02/cricket-betting-odds.png');
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+	</style>
+</head>
+<body>
+	<h1 style="text-align: center;color: black;font-size: 45px;margin-bottom: 15px;padding-bottom: 45px;">YORKING</h1>
+<form action="{% url 'login' %}" method="POST" class="login">
+	{% csrf_token %}
+	<h2>Login</h2>
+	<input type="email" name="email_login" placeholder="Enter your mail id" style="height: 33px;width: 270px;"><br><br>
+	<input type="password" name="password_login" placeholder="Enter your Password" style="height: 33px;width: 270px;"><br><br>
+	<input type="submit" name="Login" value="Login"><br>
+</form>
+<form action="{% url 'register' %}" method="POST" class="register">
+	{% csrf_token %}
+	<h2>Register</h2>
+	<input type="text" name="username" placeholder="Enter your name" style="height: 33px;width: 270px;"><br><br>
+	<input type="text" name="phone_num" placeholder="Enter your 10 digit phn number" style="height: 33px;width: 270px;"><br><br>
+	<input type="email" name="mail" placeholder="Enter your mail id" style="height: 33px;width: 270px;"><br><br>
+	<input type="password" name="password1" placeholder="Enter your Password" style="height: 33px;width: 270px;"><br><br>
+	<input type="password" name="password2" placeholder="Re enter your password" style="height: 33px;width: 270px;"><br><br>
+	<input type="submit" name="Register" value="Register"><br>
+</form>
+</body>
+</html>

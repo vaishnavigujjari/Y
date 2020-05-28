@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<form action="{% url 'index' %}" method="POST">
+		{% csrf_token %}
+		<input type="text" name="username" placeholder="Enter user name "><br>
+		<input type="password" name="password" placeholder="Enter ur pwd"><br>
+		<input type="submit" name="submit">
+	</form>
+	
+
+
+	<script > 
+
+    var text = {{ hello|safe  }};
+
+    var Current = 0;
+    var display = text.slice(Current,5);
+    document.getElementById("textHere").innerHTML = display;
+
+    function Prev(){
+        if(Current == 0){
+            Current = text.length - 1;}
+        else{
+            Current--;}
+
+        document.getElementById("textHere").innerHTML = text.slice(Current,Current+5);
+    }
+
+    function Next(){
+        if(Current == text.length - 1){
+            Current = 0}
+        else{
+            Current++;}
+
+        document.getElementById("textHere").innerHTML = text.slice(Current,Current-5);;
+    }
+
+</script>
+<script type="text/javascript">
+	function hi(){
+	var rows = [{
+    name: "John",
+    age: 20,
+    email: "xx@hotmail.com"
+}, {
+    name: "Jack",
+    age: 50,
+    email: "xxx@hotmail.com"
+}, {
+    name: "Son",
+    age: 45,
+    email: "xxxx@hotmail.com"
+}];
+
+var html = "<table border='1|1'>";
+for (var i = 0; i < rows.length; i++) {
+    html+="<tr>";
+    html+="<td>"+rows[i].name+"</td>";
+    html+="<td>"+rows[i].age+"</td>";
+    html+="<td>"+rows[i].email+"</td>";
+
+    html+="</tr>";
+
+}
+html+="</table>";
+document.getElementById("box").innerHTML = html;
+}
+var cur = 0;
+var array = {{ hello|safe  }};
+	var rem=array.length;
+	var bt1 = document.getElementById('btn1');
+
+function hm(){
+	
+if 	(rem>=10){
+for (i = cur; i < cur +10; i++) {
+  var li = document.createElement("li");
+  var text = document.createTextNode(array[i]);
+  li.appendChild(text);
+  document.getElementById("myUl").appendChild(li);
+}
+cur+=10;
+rem-=10;
+}
+else{
+
+	for (i = cur; i < cur +rem; i++) 
+	{
+  		var li = document.createElement("li");
+  		var text = document.createTextNode(array[i]);
+  		li.appendChild(text);
+  		document.getElementById("myUl").appendChild(li);
+  	}
+  	rem=0
+
+}
+if (rem==0){
+	bt1.disabled = true;
+}
+}
+</script>
+<script type="text/javascript">
+	
+
+
+	var rows={{ y|safe }};
+      var Current = 0;
+      var remaining = rows.length - (Current +10 );
+      var bt1 = document.getElementById('btn1');
+      var bt2 = document.getElementById('btn2');
+      function next()
+      {
+        var html="<table>";
+        html+="<thead>";
+        html+="<tr>";
+        html+="<th><h2>Rank</h2></th>";
+        htnl+="<th><h2>Username</h2></th>";
+        html+="<th><h2>Email</h2></th>";
+        html+="<th><h2>Points Earned</h2></th>";
+        html+="<th><h2>Details</h2></th>";
+        html+="</tr>";
+        html+="</thead>";
+        html+="<tbody>";
+        if remaining>=10 
+        {
+          bt1.disabled = false;
+          Current+=10;
+          for (var i =Current;i<Current+10;i++)
+          {
+            html+="<tr>";
+            html+="<td><p>"+y[0][i].user_name+"</p></td>";
+            html+="<td><p>"+ y[0][i].email"</p></td>";
+            html+="<td><p>"+y[1][i];+"</p></td>";
+            html+="</tr>";
+          } 
+          html+="</tbody>";
+          html+="</table>";
+        }
+        else
+        {
+          bt1.disabled = true;
+          Current+=10;
+          for (var i =Current;i<Current+remaining;i++)
+          {
+            html+="<tr>";
+            html+="<td><p>"+(i+1)+"</p></td>";
+            html+="<td><p>"+y[0][i].user_name+"</p></td>";
+            html+="<td><p>"+ y[0][i].email"</p></td>";
+            html+="<td><p>"+y[1][i];+"</p></td>";
+            html+="</tr>";
+          } 
+          html+="</tbody>";
+          html+="</table>";
+        }
+        remaining=remaining-10
+        document.getElementById("lbm").innerHTML = html;
+      }
+      function hi()
+      {
+        document.getElementById("lbm").innerHTML="HELLO";
+      }
+</script>
+<p id="textHere"></p>
+<div id="box">
+	<ul id="myUl"></ul>
+	
+</div>
+<div>
+    <button onclick="hm();" >Next!</button>
+    <button onclick="hi();" id="btn1">Previous</button>
+</div>
+</body>
+</html>

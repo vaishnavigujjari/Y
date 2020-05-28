@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href='{% static "Yorking/css/form.css"  %}'/>
+  </head>
+  <body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+            <a class="navbar-brand" href="#">HOME</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li ><a href="Bootstrap_Project_Main.html">Top Prefomers</a></li>
+            <li ><a href="Bootstrap_Project_Main.html">Edit Match Perfomance</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+    <!-- EVERYTHING INSIDE HTML PAGE -->
+    <div class="container">
+      <div class="split left">
+        <div class="jumbotron">
+
+          <!-- LEFT HALF OF THE PAGE -->
+          <h1>YORKING!</h1>
+          <img src='url(https://w7.pngwing.com/pngs/20/928/png-transparent-cricket-bat-papua-new-guinea-national-cricket-team-ball-cricket-set-sport-photography-cricket-bats-thumbnail.png)'  class='relative' alt='My image'/>
+        </div>
+      </div>
+      <div class="split right">
+        <div class="jumbotron">
+
+            <!-- RIGHT HALF OF THE PAGE -->
+          <form action="{% url 'create_match' %}" method="POST">
+
+            {% csrf_token %}
+            {% if error %}
+            {% for i in error %}
+            <h2>{{i}}</h2>
+            {% endfor %}
+            {% endif %}
+
+            <div class="form-group">
+              <h3>Create a match</h3>
+              <br><br><br>
+              <label for="countryone">Country 1:</label>
+              <select id="countries" name="country1">
+                {% for i in countries %}
+                <option value="{{i.country}}">{{i.country}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <p></p>
+            <div class="form-group">
+              <label for="countrytwo">Country 2:</label>
+              <select id="countries" name="country2">
+                {% for i in countries %}
+                <option value="{{i.country}}">{{i.country}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="container">
+              <h2>  </h2>
+            </div>
+            <br><br>
+            <h3>Enter pass key to create a match</h3>
+   <input type="password" name="pass_key_create" id="pass_key_create" onkeyup="manage(this)">
+
+            <br><br>
+
+
+
+            <div class="form-group">
+              <button type="submit" name="c_ma" class="btn btn-warning margin-bottom button" id="c_ma" disabled>Submit</button>
+        
+            </div>
+
+          </form>
+          <br><br><br>
+          <h3>Enter match scores</h3>
+
+           <form action="{% url 'Players_list' %}" method="POST">
+  <table class="table" style="text-align: center;">
+
+    <!--Table head -->
+    <thead>
+      <tr>
+        <th><h2>Match ID</h2></th>
+        <th><h2>Country-1</h2></th>
+        <th><h2>Country-2</h2></th>
+        <th><h2>Details</h2></th>
+      </tr>
+    </thead>
+    <!-- end of Table head -->
+
+    <!--Table Body -->
+    <tbody>
+      
+     
+        {% for i in matches %}
+        {% csrf_token %}
+      <tr>
+        
+        
+        <td><p style="font-size:14px;">{{ forloop.counter }}</p></td>
+        <td><p style="font-size:14px;">{{ i.country1 }}</p></td>
+        <td><p style="font-size:14px;">{{ i.country2 }}</p></td>
+        
+        <td><input type="radio" name="match" id="match" value="{{i.match_id}}"></td>
+      </tr> 
+      {% endfor %}
+      <br>
+      <br><br>
+ 
+      
+    </tbody>
+  </table>
+  <h3>Enter pass key to enter the details</h3>
+   <input type="password" name="pass_key" id="pass_key" onkeyup="manage1(this)">
+   <br><br>
+  <div class="container h-100">
+        <div class="d-flex h-100"> 
+         <div class="align-self-center mx-auto"> 
+      <input type="submit" name="update_scores" class="btn btn-success" id="update_scores" disabled>
+    </div>
+  </div>
+</div>
+   </form>
+   
+          
+        </div>
+      </div>
+    </div>
+
+<script>
+  function manage(txt) {
+        var bt = document.getElementById('c_ma');
+        if (txt.value != 'york123create') {
+            bt.disabled = true;
+        }
+        else {
+            bt.disabled = false;
+        }
+    }   
+
+    function manage1(txt) {
+        var bt = document.getElementById('update_scores');
+        if (txt.value != 'york123update') {
+            bt.disabled = true;
+        }
+        else {
+            bt.disabled = false;
+        }
+    }   
+    </script>
+    <!-- BOOTSTRAP AND JQUERY LINKS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
